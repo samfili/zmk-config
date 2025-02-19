@@ -1,0 +1,281 @@
+//
+//                                                        ▀▀▀▀▀     ▀▀▀▀▀          ▀▀█▀▀
+//                                                        ▄▀▀▀▄  ▄  ▄▀▀▀▄  ▄  ▄▀▀▀▄  █  ▄▀▀▀▄
+//                                                        █   █  █  █   █  █  █   █  █  █   █
+//                                                         ▀▀▀   █   ▀▀▀   █   ▀▀▀   ▀   ▀▀▀
+//                                                               █      ▄▄▄█▄▄▄    █   █  
+//                                                               ▀      █  █  █     █▄█
+//                                                             ▀▀▀▀▀    █  █  █      ▀
+//                                                                      ▀  ▀  ▀
+//
+// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+
+#define Base        0
+#define Sym         1
+#define Num         2
+
+/ {
+    behaviors {
+        layer_1_layer_2: layer_1_layer_2 {
+            compatible = "zmk,behavior-tap-dance";
+            label = "LAYER_1_LAYER_2";
+            #binding-cells = <0>;
+            bindings = <&to 2>, <&to 1>;
+        };
+
+        sqt_to_0: sqt_to_0 {
+            compatible = "zmk,behavior-tap-dance";
+            label = "SQT_TO_0";
+            #binding-cells = <0>;
+            bindings = <&kp SQT>, <&to 0>;
+        };
+
+        sl_sk: sl_sk {
+            compatible = "zmk,behavior-hold-tap";
+            label = "SL_SK";
+            bindings = <&sk>, <&sl>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            flavor = "balanced";
+        };
+
+        kp_sk: kp_sk {
+            compatible = "zmk,behavior-hold-tap";
+            label = "KP_SK";
+            bindings = <&sk>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <250>;
+            flavor = "balanced";
+        };
+
+        kp_kp: kp_kp {
+            compatible = "zmk,behavior-hold-tap";
+            label = "KP_KP";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <250>;
+            flavor = "tap-preferred";
+            hold-trigger-on-release;
+        };
+
+        kp_comment: kp_comment {
+            compatible = "zmk,behavior-hold-tap";
+            label = "KP_COMMENT";
+            bindings = <&comment>, <&kp>;
+
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+        };
+
+        kp_link: kp_link {
+            compatible = "zmk,behavior-hold-tap";
+            label = "KP_LINK";
+            bindings = <&link>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            flavor = "tap-preferred";
+        };
+
+        kp_caps_word: kp_caps_word {
+            compatible = "zmk,behavior-hold-tap";
+            label = "KP_CAPS_WORD";
+            bindings = <&caps_word>, <&kp>;
+
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+        };
+
+        kp_lt: kp_lt {
+            compatible = "zmk,behavior-hold-tap";
+            label = "KP_LT";
+            bindings = <&lt>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <300>;
+            flavor = "tap-preferred";
+        };
+
+        sk_mo: sk_mo {
+            compatible = "zmk,behavior-hold-tap";
+            label = "SK_MO";
+            bindings = <&mo>, <&sk>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <150>;
+        };
+
+        alfred_q: alfred_q {
+            compatible = "zmk,behavior-tap-dance";
+            label = "ALFRED_Q";
+            #binding-cells = <0>;
+            bindings = <&kp Q>, <&alfred>;
+
+            tapping-term-ms = <200>;
+        };
+
+        clipboard_w: clipboard_w {
+            compatible = "zmk,behavior-tap-dance";
+            label = "CLIPBOARD_W";
+            #binding-cells = <0>;
+            bindings = <&kp W>, <&kp LA(LG(C))>;
+        };
+    };
+
+    macros {
+        alfred: alfred {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LEFT_GUI &kp LGUI>;
+            label = "ALFRED";
+            wait-ms = <1>;
+            tap-ms = <40>;
+        };
+
+        comment: comment {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp GRAVE &kp GRAVE &kp GRAVE>;
+            label = "COMMENT";
+            wait-ms = <1>;
+            tap-ms = <1>;
+        };
+
+        link: link {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LBKT &kp RIGHT_BRACKET &kp LPAR &kp RPAR>;
+            label = "LINK";
+            wait-ms = <1>;
+            tap-ms = <1>;
+        };
+
+        save_vim: save_vim {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp COLON &kp W &kp RET>;
+            label = "SAVE_VIM";
+        };
+    };
+
+    combos {
+        compatible = "zmk,combos";
+
+        alt_tab {
+            bindings = <&kp LG(TAB)>;
+            key-positions = <0 34>;
+        };
+
+        enter {
+            bindings = <&kp ENTER>;
+            key-positions = <33 32>;
+        };
+
+        tab_aine {
+            bindings = <&kp TAB>;
+            key-positions = <4 14>;
+        };
+
+        enter-2 {
+            bindings = <&kp ENTER>;
+            key-positions = <36 37>;
+        };
+
+        backspace {
+            bindings = <&kp BACKSPACE>;
+            key-positions = <24 13>;
+        };
+
+        backspace-2 {
+            bindings = <&kp BACKSPACE>;
+            key-positions = <16 27>;
+        };
+
+        enter-3 {
+            bindings = <&kp ENTER>;
+            key-positions = <33 34>;
+        };
+
+        enter-4 {
+            bindings = <&kp ENTER>;
+            key-positions = <36 35>;
+        };
+
+        shortcuts {
+            bindings = <&lt 5 LEFT_SHIFT>;
+            key-positions = <10 21>;
+            timeout-ms = <5>;
+            require-prior-idle-ms = <20>;
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        Base {
+            label = "Base";
+            bindings = <
+                          &kp Q           &clipboard_w  &kp E      &kp R      &kp T         &kp Y          &kp U                   &kp I      &kp_kp UNDER O  &kp_kp MINUS P
+                          &kp_kp AT A     &kp S         &kp D      &kp F      &kp G         &kp H          &kp J                   &kp K      &kp L           &kp_kp PIPE SEMICOLON
+&kp_sk LEFT_SHIFT ESCAPE  &kp_kp LCTRL Z  &kp X         &kp C      &kp V      &kp B         &kp_kp SQT N   &kp_kp DOUBLE_QUOTES M  &kp COMMA  &kp DOT         &kp_kp QUESTION SLASH  &sl_sk LEFT_SHIFT 3
+                                                        &lt 1 TAB  &kp SPACE  &lt 4 LGUI    &kp BACKSPACE  &lt 1 SPACE             &lt 2 TAB
+            >;
+        };
+
+        Num {
+            label = "Num";
+            bindings = <
+        &kp N1         &kp N2     &kp N3                &kp N4                 &kp N5      &kp N6     &kp N7    &kp N8        &kp_kp UNDERSCORE NUMBER_9  &kp_kp MINUS N0
+        &kp SEMICOLON  &kp MINUS  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp DOT     &kp EQUAL  &kp LEFT  &kp UP_ARROW  &kp RIGHT                   &kp COLON
+&trans  &kp GRAVE      &kp AT     &kp LBKT              &kp RBKT               &kp PLUS    &kp MINUS  &kp LEFT  &kp DOWN      &kp RIGHT                   &kp BACKSLASH    &trans
+                                  &trans                &trans                 &trans      &trans     &trans    &trans
+            >;
+        };
+
+        Sym {
+            label = "Sym";
+            bindings = <
+        &kp GRAVE  &kp AMPERSAND  &kp ASTERISK  &kp LEFT_BRACE  &kp RIGHT_BRACE    &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &trans
+        &kp COLON  &kp DOLLAR     &kp PERCENT   &kp CARET       &kp PLUS           &kp LEFT_BRACKET      &kp LEFT               &kp UP_ARROW      &kp RIGHT          &none
+&trans  &kp TILDE  &kp EXCL       &kp AT        &kp HASH        &kp PIPE           &kp DQT               &kp LEFT_ARROW         &kp DOWN_ARROW    &kp RIGHT          &kp BACKSLASH  &trans
+                                  &trans        &trans          &trans             &trans                &trans                 &trans
+            >;
+        };
+
+        shortcuts {
+            bindings = <
+        &kp LG(NUMBER_1)  &kp LG(NUMBER_2)  &kp LG(NUMBER_3)  &kp LG(NUMBER_4)  &save_vim    &comment              &kp LG(LA(C))  &kp LC(LG(O))  &none          &save_vim
+        &kp LC(LG(S))     &none             &none             &kp LS(LG(D))     &none        &link                 &kp LG(LC(F))  &kp LG(LC(K))  &kp LG(LC(G))  &none
+&trans  &kp LG(LC(Z))     &kp LG(LC(X))     &kp LG(LC(C))     &kp LG(D)         &none        &kp LALT              &kp LG(LC(I))  &kp LC(LG(F))  &kp LC(LG(K))  &none      &alfred
+                                            &none             &none             &alfred      &kp LS(LG(NUMBER_4))  &none          &none
+            >;
+        };
+
+        meta {
+            label = "meta";
+            bindings = <
+                &kp LG(Q)  &kp LG(W)  &kp LG(E)  &kp LG(R)  &kp LG(T)    &kp LG(Y)             &kp LG(U)  &kp LG(I)      &kp LG(O)    &kp LG(MINUS)
+                &kp LG(A)  &kp LG(S)  &kp LG(D)  &kp LG(F)  &kp LG(G)    &kp LG(H)             &kp LG(J)  &kp LG(K)      &kp LG(L)    &kp LG(SEMICOLON)
+&kp LEFT_SHIFT  &kp LG(Z)  &kp LG(X)  &kp LG(C)  &kp LG(V)  &none        &kp LG(N)             &kp LG(M)  &kp LG(COMMA)  &kp LG(DOT)  &kp LG(SLASH)      &kp RIGHT_SHIFT
+                                      &trans     &kp SPACE  &none        &kp LG(LS(NUMBER_4))  &none      &trans
+            >;
+        };
+
+        vim {
+            bindings = <
+        &trans  &trans  &trans  &trans  &trans    &trans  &kp LEFT_BRACE      &kp RIGHT_BRACE  &trans         &save_vim
+        &trans  &trans  &trans  &trans  &trans    &trans  &kp LA(LEFT)        &kp LA(UP)       &kp LA(RIGHT)  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &kp LA(LEFT_ARROW)  &kp LA(DOWN)     &kp LA(RIGHT)  &trans     &trans
+                        &trans  &trans  &trans    &trans  &trans              &trans
+            >;
+        };
+    };
+};
