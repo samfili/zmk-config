@@ -76,7 +76,7 @@
             require-prior-idle-ms = <100>;
         };
 
-        // Русская Ъ — по I+O
+        // Русская Ъ — по O+P
         russian_letter_hard_sign {
             bindings = <&kp RIGHT_BRACKET>;
             key-positions = <8 9>;
@@ -84,7 +84,7 @@
             require-prior-idle-ms = <100>;
         };
 
-        // Русская Х — по U+I
+        // Русская Х — по I+O
         russian_letter_x {
             bindings = <&kp LEFT_BRACKET>;
             key-positions = <8 7>;
